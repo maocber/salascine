@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -50,20 +51,19 @@ public class PeliculaEntity {
 	@OneToMany(mappedBy = "pelicula")
 	private List<DatosExtraEntity> datosExtra;
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinTable(
-	        name = "pelicula_sucursal",
-	        joinColumns = @JoinColumn(name = "FK_Pelicula", nullable = false),
-	        inverseJoinColumns = @JoinColumn(name="FK_Sucursal", nullable = false)
-	)
-	@ManyToMany(cascade = CascadeType.ALL)
+	  name = "pelicula_sucursal", 
+	  joinColumns = @JoinColumn(name = "pelicula_id", nullable=false), 
+	  inverseJoinColumns = @JoinColumn(name = "sucursal_id", nullable=false))
     private List<SucursalEntity> sucursales;
 	
+	@ManyToMany(cascade = CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinTable(
 	        name = "pelicula_genero",
-	        joinColumns = @JoinColumn(name = "FK_PeliculaGen", nullable = false),
-	        inverseJoinColumns = @JoinColumn(name="FK_GeneroPel", nullable = false)
+	        joinColumns = @JoinColumn(name = "pelicula_id", nullable = false),
+	        inverseJoinColumns = @JoinColumn(name="genero_id", nullable = false)
 	)
-	@ManyToMany(cascade = CascadeType.ALL)
     private List<GeneroEntity> generos;
 
 }

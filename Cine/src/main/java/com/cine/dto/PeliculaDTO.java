@@ -15,6 +15,6 @@ public class PeliculaDTO {
 	private Date fechaBaja;
 	private int duracion;
 	private TipoSalaDTO formato;
-	private List<SucursalDTO> sucursales;
 	private List<DatosExtraDTO> datosExtra;
+	private List<GeneroDTO> generos;
 }

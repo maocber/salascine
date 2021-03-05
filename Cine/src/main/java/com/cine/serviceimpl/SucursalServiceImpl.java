@@ -12,13 +12,13 @@ import com.cine.constants.Constantes;
 import com.cine.dto.SucursalDTO;
 import com.cine.entity.SucursalEntity;
 import com.cine.repository.ISucursalRepository;
-import com.cine.service.ISucursalesService;
+import com.cine.service.ISucursalService;
 import com.cine.util.Mensajes;
 import com.cine.util.ModelMapperUtil;
 import com.cine.dto.SalaDTO;
 
 @Service
-public class SucursalServiceImpl implements ISucursalesService {
+public class SucursalServiceImpl implements ISucursalService {
 	private static final Logger LOG = LoggerFactory.getLogger(SucursalServiceImpl.class);
 	
 	@Autowired
@@ -33,8 +33,8 @@ public class SucursalServiceImpl implements ISucursalesService {
 		LOG.info(sucursal.getNombre());
 		
 		try {
-			 SucursalEntity sucursalModel = mapper.map(sucursal, SucursalEntity.class);
-			sucursalRepository.save(sucursalModel);
+			SucursalEntity sucursalModel = mapper.map(sucursal, SucursalEntity.class);
+			sucursalModel = sucursalRepository.save(sucursalModel);
 			sucursal.setId(sucursalModel.getId());
 			return sucursal;
 		} catch (Exception e) {
@@ -66,6 +66,16 @@ public class SucursalServiceImpl implements ISucursalesService {
 	public List<SucursalDTO> crearSala(SalaDTO sala) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public long getTotalSucusales(long ciudad) {
+		try {
+			long total = sucursalRepository.count();
+			return total;
+		} catch (Exception e) {
+			return -1;
+		}
 	}
 
 }

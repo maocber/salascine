@@ -12,4 +12,6 @@ public interface ISucursalRepository extends JpaRepository<SucursalEntity, Long>
 
 	@Query(value = "select s.* from sucursal s where ciudad_id = ?", nativeQuery = true)
 	public List<SucursalEntity> findAllSucursalesXCiudad(@Param("ciudad_id") Long id);
+	
+	public SucursalEntity findByNombre(String nombre);
 }
